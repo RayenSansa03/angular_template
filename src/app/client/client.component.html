@@ -1,0 +1,87 @@
+<div>
+  <h1>Clients</h1>
+  <ul>
+    <li *ngFor="let client of clients">
+      {{ client.nom }} {{ client.prenom }}
+      <button (click)="getClient(client._id)">Details</button>
+      <button (click)="deleteClient(client._id)">Delete</button>
+    </li>
+  </ul>
+
+  <div *ngIf="client._id">
+    <h2>Client Details</h2>
+    <p>Name: {{ client.nom }} {{ client.prenom }}</p>
+    <p>Date of Birth: {{ client.dateNaissance }}</p>
+    <p>Sex: {{ client.sexe }}</p>
+    <p>Start Date: {{ client.dateDebut }}</p>
+    <p>End Date: {{ client.dateFin }}</p>
+    <p>Phone Number: {{ client.numeroTel }}</p>
+    <p>Email: {{ client.email }}</p>
+    <p>
+      Image:
+      <img [src]="client.image" alt="Client Image" *ngIf="client.image" />
+    </p>
+  </div>
+
+  <div>
+    <h2>Create/Update Client</h2>
+    <form (ngSubmit)="createClient()">
+      <label>
+        Nom:
+        <input [(ngModel)]="client.nom" name="nom" required />
+      </label>
+      <label>
+        Prenom:
+        <input [(ngModel)]="client.prenom" name="prenom" required />
+      </label>
+      <label>
+        Date of Birth:
+        <input
+          type="date"
+          [(ngModel)]="client.dateNaissance"
+          name="dateNaissance"
+          required
+        />
+      </label>
+      <label>
+        Sex:
+        <select [(ngModel)]="client.sexe" name="sexe" required>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
+        </select>
+      </label>
+      <label>
+        Start Date:
+        <input
+          type="date"
+          [(ngModel)]="client.dateDebut"
+          name="dateDebut"
+          required
+        />
+      </label>
+      <label>
+        End Date:
+        <input
+          type="date"
+          [(ngModel)]="client.dateFin"
+          name="dateFin"
+          required
+        />
+      </label>
+      <label>
+        Phone Number:
+        <input [(ngModel)]="client.numeroTel" name="numeroTel" required />
+      </label>
+      <label>
+        Email:
+        <input [(ngModel)]="client.email" name="email" required />
+      </label>
+      <label>
+        Image:
+        <input type="file" (change)="onFileSelected($event)" />
+      </label>
+      <button type="submit">Save</button>
+    </form>
+  </div>
+</div>
